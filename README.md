@@ -218,10 +218,10 @@ output {
 
 
 ## [PART 1] Monitoring Kafka using ELK stack
- - link
+ - link (https://github.com/freepsw/kafka-monitoring/tree/master/01.Monitoring_with_ELK)
 
 ## [PART 2] Monitoring Kafka using datadog service
- - link
+ - link (https://github.com/freepsw/kafka-monitoring/tree/master/10.Monitoring_with_Datadog)
 
 
 
