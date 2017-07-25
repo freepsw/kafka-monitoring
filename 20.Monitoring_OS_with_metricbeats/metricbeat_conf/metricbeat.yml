@@ -1,0 +1,47 @@
+#==========================  Modules configuration ============================
+metricbeat.modules:
+
+#------------------------------- System Module -------------------------------
+- module: system
+  metricsets:
+    # CPU stats
+    - cpu
+
+    # System Load stats
+    - load
+
+    # Per CPU core stats
+    - core
+
+    # IO stats
+    - diskio
+
+    # Per filesystem stats
+    - filesystem
+
+    # File system summary stats
+    - fsstat
+
+    # Memory stats
+    - memory
+
+    # Network stats
+    - network
+
+    # Per process stats
+    - process
+
+    # Sockets (linux only)
+    #- socket
+  enabled: true
+  period: 10s
+  processes: ['.*']
+  cpu_ticks: false
+
+#-------------------------- Elasticsearch output ------------------------------
+output.elasticsearch:
+  # Array of hosts to connect to.
+  hosts: ["localhost:9200"]
+  # index를 지정할 수도 있으나, Default값인 "metricbeat-*"으로 저장되어야
+  # metricbeat에서 제공하는 kiban dashboard를 사용할 수 있다. 
+#  index: "broker1-metric"

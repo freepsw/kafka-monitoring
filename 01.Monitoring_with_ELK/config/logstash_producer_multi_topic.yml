@@ -1,0 +1,23 @@
+input {
+  file {
+    type => "topic_001"
+    path => "/home/rts/kafka-poc/data/input/prod_02.dat"
+  }
+}
+
+output {
+  if "002prod" in [message] {
+    stdout {
+      codec => rubydebug{ }
+    }
+  }
+
+
+  kafka {
+    codec => plain {
+      format => "%{message}"
+    }
+    bootstrap_servers => "localhost:9092"
+    topic_id => "test"
+  }
+}

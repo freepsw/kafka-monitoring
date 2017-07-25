@@ -1,0 +1,32 @@
+input {
+  generator {
+    lines => [
+      "line 1",
+      "line 2",
+      "line 3"
+    ]
+    # Emit all lines 3 times.
+    count => 10000
+  }
+}
+
+filter {
+  sleep {
+    time => "1"   # Sleep 1 second
+    every => 2   # on every 10th event
+  }
+}
+
+output {
+  stdout {
+    codec => rubydebug{ }
+  }
+
+  kafka {
+    codec => plain {
+      format => "%{message}"
+    }
+    bootstrap_servers => "localhost:9092"
+    topic_id => "test"
+  }
+}

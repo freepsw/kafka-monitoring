@@ -1,0 +1,20 @@
+filebeat.prospectors:
+- input_type: log
+  document_type: F1
+  paths:
+    - /home/poc/data/F1.dat
+
+- input_type: log
+  document_type: test2
+  paths:
+    - /home/poc/data/F2.dat
+
+output.kafka:
+  # The Logstash hosts
+  hosts: ["broker06:9092","broker07:9092","broker08:9092"]
+  topic: '%{[type]}'
+  codec.format:
+    string: '%{[message]}'
+  required_acks: -1
+  max_retries: 3
+  bulk_max_size: 2048

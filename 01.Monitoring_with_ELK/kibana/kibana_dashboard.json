@@ -1,0 +1,36 @@
+[
+  {
+    "_id": "57d87d40-5a3d-11e7-a06b-bfa32df73ed4",
+    "_type": "dashboard",
+    "_source": {
+      "title": "KafkaMon-Dash(throughput)",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"col\":1,\"id\":\"09564bf0-5a30-11e7-a06b-bfa32df73ed4\",\"panelIndex\":2,\"row\":1,\"size_x\":12,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"id\":\"f1e4eb80-5a29-11e7-a406-63b0e3ccc267\",\"panelIndex\":3,\"row\":17,\"size_x\":12,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"id\":\"1beb2240-5a44-11e7-a06b-bfa32df73ed4\",\"panelIndex\":5,\"row\":7,\"size_x\":12,\"size_y\":4,\"type\":\"visualization\"},{\"col\":1,\"id\":\"1c9d7880-5ad7-11e7-a406-63b0e3ccc267\",\"panelIndex\":6,\"row\":4,\"size_x\":12,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"id\":\"e4a325a0-5b09-11e7-afa4-79fb9d9351b8\",\"panelIndex\":7,\"row\":11,\"size_x\":12,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"id\":\"68c1fc30-5b0f-11e7-afa4-79fb9d9351b8\",\"panelIndex\":8,\"row\":14,\"size_x\":12,\"size_y\":3,\"type\":\"visualization\"}]",
+      "optionsJSON": "{\"darkTheme\":false}",
+      "uiStateJSON": "{\"P-2\":{\"spy\":{\"mode\":{\"fill\":false,\"name\":null}},\"vis\":{\"colors\":{\"kafka-consumer.Consumer.RecordsConsumed.records-consumed-rate\":\"#629E51\",\"kafkabroker1.FetchConsumer.Mean\":\"#3F6833\",\"kafkabroker1.Procude.Mean\":\"#E5AC0E\"},\"legendOpen\":true}},\"P-3\":{\"vis\":{\"legendOpen\":false}},\"P-5\":{\"vis\":{\"legendOpen\":true}},\"P-6\":{\"vis\":{\"colors\":{\"kafkabroker1.BrokerTopicMetrics.BytesInPerSec.OneMinuteRate\":\"#E24D42\"},\"legendOpen\":true}},\"P-7\":{\"spy\":{\"mode\":{\"fill\":false,\"name\":null}}}}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}],\"highlightAll\":true,\"version\":true}"
+      }
+    }
+  },
+  {
+    "_id": "58f3bde0-5bd5-11e7-be67-49b67c124db6",
+    "_type": "dashboard",
+    "_source": {
+      "title": "KafkaMon-Dash(Resource)",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"col\":1,\"id\":\"41dc5590-5bd5-11e7-be67-49b67c124db6\",\"panelIndex\":1,\"row\":10,\"size_x\":12,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"id\":\"0c96b8b0-5bd7-11e7-be67-49b67c124db6\",\"panelIndex\":2,\"row\":7,\"size_x\":12,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"id\":\"f7849b30-5c63-11e7-844c-bbc872ee5c30\",\"panelIndex\":3,\"row\":13,\"size_x\":12,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"id\":\"065b3d90-5c63-11e7-8b85-6d355270351a\",\"panelIndex\":4,\"row\":4,\"size_x\":12,\"size_y\":3,\"type\":\"visualization\"},{\"size_x\":12,\"size_y\":3,\"panelIndex\":5,\"type\":\"visualization\",\"id\":\"7399a5c0-6057-11e7-87bb-1dcc594557a4\",\"col\":1,\"row\":1}]",
+      "optionsJSON": "{\"darkTheme\":false}",
+      "uiStateJSON": "{}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}],\"highlightAll\":true,\"version\":true}"
+      }
+    }
+  }
+]

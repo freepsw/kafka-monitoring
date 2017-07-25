@@ -1,0 +1,45 @@
+input {
+ jmx {
+  path => "/home/poc/jmx_conf"
+  polling_frequency => 2
+  type => "jmx"
+ }
+}
+
+filter {
+ if [type] == "jmx" {
+   if ("ProcessCpuLoad" in [metric_path] or "SystemCpuLoad" in [metric_path]) {
+     ruby {
+       code => "n = event.get('[metric_value_number]')
+                event.set('[metric_value_number]', n*100)
+                event.set('cpu_load',n)
+               "
+     }
+   }
+   if ("TotalPhysicalMemorySize" in [metric_path] or "FreePhysicalMemorySize" in [metric_path]) {
+     ruby {
+       code => "n = event.get('[metric_value_number]')
+                event.set('[metric_value_number]', n/1024/1024)
+                event.set('physical_memory',n)
+               "
+     }
+   }
+   if ("HeapMemoryUsage" in [metric_path] or "HeapMemoryUsage" in [metric_path]) {
+     ruby {
+       code => "n = event.get('[metric_value_number]')
+                event.set('[metric_value_number]', n/1024/1024)
+               "
+     }
+   }
+ }
+}
+
+output{
+ stdout {
+  codec => rubydebug
+ }
+ elasticsearch {
+   hosts => "10.178.50.103:9200"
+   index => "kafka_mon"
+ }
+}

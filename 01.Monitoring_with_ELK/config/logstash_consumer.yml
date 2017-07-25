@@ -1,0 +1,17 @@
+input {
+  kafka {
+    type => "F1"
+    bootstrap_servers => "broker06:9092,broker07:9092,broker08:9092"
+    topics => "F1"
+    group_id => "logstash"
+    max_poll_records => "5"
+    receive_buffer_bytes => "10240"
+  }
+}
+
+output {
+    file {
+       path => "F1.dat"
+       codec => line { format => "%{message}" }
+     }
+}

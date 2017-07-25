@@ -1,0 +1,18 @@
+input {
+  file {
+    path => "/home/poc/F1.dat"
+    start_position => "beginning"
+  }
+}
+
+output {
+   kafka {
+     codec => plain { format => "%{message}" }
+     bootstrap_servers => "broker06:9092"
+     topic_id => "F1"
+     acks => "all"
+     retries => 20
+     batch_size => 49152
+     linger_ms => 2000
+   }
+}
