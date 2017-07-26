@@ -51,7 +51,7 @@ bin/kibana
 - jmx path 아래에 있는 jmx 설정파일 들을 수집한다. (broker, producer, consumer, zookeeper)
 - logstash_jmx_kafka.yml
 
-```json
+```yml
 input {
  jmx {
   path => "/home/poc/jmx_conf"
@@ -103,7 +103,7 @@ output{
 - logstash를 실행해 보면, 화면에 cpu_load라는 필드가 추가된 것을 볼 수 있다.
 - https://www.elastic.co/guide/en/logstash/current/event-api.html 참고
 
-```json
+```yml
 {
     "metric_value_number" => 0.020206998521439132,
                    "path" => "/home/rts/apps/logstash-5.4.1/jmx",
@@ -320,7 +320,7 @@ bin/logstash  -f config/jmx_kafka.yml
 
 ### 수집된 jmx metrics 예시
 
-```json
+```yml
 {
     "metric_value_number" => 0.1642061100531988,
                    "path" => "/home/rts/apps/logstash-5.4.1/jmx",
