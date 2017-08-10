@@ -4,7 +4,7 @@
 
 
 ## [PART 1] Run Kafka Cluster & Zookeeper & Producer & Consumer with jmx option
- 
+ - link (https://github.com/freepsw/kafka-monitoring/blob/master/Run_KafkaCluster_with_jmx.md)
 ## [PART 2] Monitoring Kafka using ELK stack
  - link (https://github.com/freepsw/kafka-monitoring/tree/master/01.Monitoring_with_ELK)
 
