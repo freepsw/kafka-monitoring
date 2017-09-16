@@ -39,7 +39,7 @@ output{
   codec => rubydebug
  }
  elasticsearch {
-   hosts => "10.178.50.103:9200"
+   hosts => "localhost:9200"
    index => "kafka_mon"
  }
 }
