@@ -59,7 +59,7 @@ echo 1 > /proc/sys/vm/drop_caches
   - 1,000,000 byte(1M)를 넘을 수 있을까?
   - 그렇다면 1개 메시지의 크기가 아니라 어떤 크기를 의미할까?
 
-### [Solve]
+### [Solution]
 - 아래 3개 설정 값을 함꼐 수정해야 정상적으로 메시지 처리가 가능하다.
 
 - Broker (server.properties)

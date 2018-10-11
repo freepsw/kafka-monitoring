@@ -2,6 +2,8 @@
 - Apache Kafka를 구성하는 Broker, Producer, Consumer, Zookeeper를 통합 모니터링하기 위한 방안 검토
 - JMX metrics 기반으로, ELK stack을 이용하여 통합 모니터링 dashboard를 구성한다.
 
+# Kafka 모니터링 아키텍처
+ ![flume evtns](https://github.com/freepsw/kafka-monitoring/tree/master/01.Monitoring_with_ELK/img_monitoing_stack.png)
 
 # [PART 1] Install and run Elasticsearch & Kibana
 ## STEP 1.  Elasticsearch-5.4.3 Install
