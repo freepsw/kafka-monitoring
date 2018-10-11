@@ -3,7 +3,7 @@
 - JMX metrics 기반으로, ELK stack을 이용하여 통합 모니터링 dashboard를 구성한다.
 
 # Kafka 모니터링 아키텍처
- ![flume evtns](https://github.com/freepsw/kafka-monitoring/tree/master/01.Monitoring_with_ELK/img_monitoing_stack.png)
+ ![flume evtns](https://github.com/freepsw/kafka-monitoring/blob/master/01.Monitoring_with_ELK/img_monitoing_stack.png?raw=true)
 
 # [PART 1] Install and run Elasticsearch & Kibana
 ## STEP 1.  Elasticsearch-5.4.3 Install
