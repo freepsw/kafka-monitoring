@@ -3,16 +3,20 @@
 - JMX metrics 기반으로, ELK stack을 이용하여 통합 모니터링 dashboard를 구성한다.
 
 # Kafka 모니터링 아키텍처
- ![flume evtns](https://github.com/freepsw/kafka-monitoring/blob/master/01.Monitoring_with_ELK/img_monitoing_stack.png?raw=true)
+- 우리가 구축할 Kafka 모니터링 아키텍처
+-
+ ![architecture evtns](https://github.com/freepsw/kafka-monitoring/blob/master/01.Monitoring_with_ELK/img_monitoing_stack.png?raw=true)
 
 # [PART 1] Install and run Elasticsearch & Kibana
 ## STEP 1.  Elasticsearch-5.4.3 Install
 ```
-wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.3.tar.gz
-tar xvf elasticsearch-5.4.3.tar.gz
-cd elasticsearch-5.4.3
-vi config/elasticsearch.yml  (network.host: 0.0.0.0)
-bin/elasticsearch
+> mkdir ~/apps
+> cd ~/apps
+> wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.6.1.tar.gz
+> tar xvf elasticsearch-6.6.1.tar.gz
+> cd elasticsearch-6.6.1
+> vi config/elasticsearch.yml  (network.host: 0.0.0.0)
+> bin/elasticsearch
 ```
 
 ### [Error 해결] max file descriptors [4096] for elasticsearch process is too low 오류 발생시
@@ -21,24 +25,34 @@ bin/elasticsearch
 ```
 sudo vi /etc/security/limits.conf
 
-rts              -       nofile          65536
+username       -       nofile          65536
+username       -       nproc           262144
 ```
 
 ### [Error 해결] max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
 
 ```
-sudo sysctl -w vm.max_map_count=262144
+> sudo vi /etc/sysctl.conf
+> sudo sysctl -a  # 설정값 확인
+> sudo sysctl -w vm.max_map_count=262144
 ```
 
 
 ## STEP 2. Kibana Install
 
 ```
-wget https://artifacts.elastic.co/downloads/kibana/kibana-5.4.3-linux-x86_64.tar.gz
-tar xvf kibana-5.4.3-linux-x86_64.tar.gz
-vi config/kibana.yml (server.host: "0.0.0.0")
-cd kibana-5.4.3-linux-x86_64
-bin/kibana
+> mkdir ~/apps
+> cd ~/apps
+> wget https://artifacts.elastic.co/downloads/kibana/kibana-6.6.1-linux-x86_64.tar.gz
+> tar xvf kibana-6.6.1-linux-x86_64.tar.gz
+> cd kibana-6.6.1-linux-x86_64
+> vi config/kibana.yml (server.host: "0.0.0.0")
+> cd kibana-5.4.3-linux-x86_64
+> bin/kibana
+
+# backgroud 실행
+> nohup bin/kibana &
+> ps -ef | grep node
 ```
 
 
@@ -47,6 +61,14 @@ bin/kibana
 ## STEP 1. Collect Kafka Broker/Producer/Consumer jmx metrics using logstash (jmx_port 9999)
 - https://www.datadoghq.com/blog/monitoring-kafka-performance-metrics/ 참고
 - http://docs.confluent.io/current/kafka/monitoring.html#new-consumer-metrics 참고
+
+```
+> cd ~/apps
+> wget https://artifacts.elastic.co/downloads/logstash/logstash-6.6.1.tar.gz
+> tar xvf logstash-6.6.1.tar.gz
+> cd logstash-6.6.1
+> bin/logstash-plugin install logstash-input-jmx
+```
 
 ### Logstash 수집을 위한 config 설정
 - jmx input plugin을 이용하여 jmx metrics를 수집한다.
@@ -95,7 +117,7 @@ output{
   codec => rubydebug
  }
  elasticsearch {
-   hosts => "10.178.50.103:9200"
+   hosts => "localhost:9200"
    index => "kafka_mon"
  }
 }
@@ -104,6 +126,16 @@ output{
 - 위의 예시에서 event api에서 제공하는 event.set을 통하여 값을 변경하거나, 필드를 추가함.
 - logstash를 실행해 보면, 화면에 cpu_load라는 필드가 추가된 것을 볼 수 있다.
 - https://www.elastic.co/guide/en/logstash/current/event-api.html 참고
+
+### Xpack monitoring 을 위한 설정
+- Kibana monitoring에서 logstash의 성능을 모니터링 하기 위한 설정 
+- config/logstash.yml 에 xpack 모니터링을 활성화 하기 위한 설정 추가
+```yml
+xpack.monitoring.enabled: true
+xpack.monitoring.elasticsearch.username: logstash_system
+xpack.monitoring.elasticsearch.password: password
+xpack.monitoring.elasticsearch.url: ["http://localhost:9200"]
+```
 
 ```yml
 {

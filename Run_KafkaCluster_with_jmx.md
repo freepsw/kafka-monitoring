@@ -59,6 +59,18 @@ log.dirs=/logdata/data/kafka
 zookeeper.connect=192.168.100.135:2181,192.xxx.xxx.136:2181,192.xxx.xxx.137:2181
 ```
 
+#### Config JMS configuration
+- bin/kafka-run-class.sh
+- 외부 jmx client(jconsole 등)에서 접속 할 수 있도록, IP/hostname 정보를 등록한다.
+```
+# JMX settings
+if [ -z "$KAFKA_JMX_OPTS" ]; then
+  KAFKA_JMX_OPTS="-Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=34.85.37.182(kafka broker ip or hostname)  -Djava.net.preferIPv4Stack=true"
+
+fi
+```
+
+
 #### Run Kafka Cluster
 
 ```
@@ -85,11 +97,14 @@ if [ "$LS_JAVA_OPTS" ] ; then
   # set of java opts.
   JAVA_OPTS="$JAVA_OPTS $LS_JAVA_OPTS"
   JAVA_OPTS="$JAVA_OPTS -Dcom.sun.management.jmxremote"
-  JAVA_OPTS="$JAVA_OPTS -Dcom.sun.management.jmxremote.port=9010"
+  JAVA_OPTS="$JAVA_OPTS -Dcom.sun.management.jmxremote.port=9881"
   JAVA_OPTS="$JAVA_OPTS -Dcom.sun.management.jmxremote.local.only=false"
   JAVA_OPTS="$JAVA_OPTS -Dcom.sun.management.jmxremote.authenticate=false"
   JAVA_OPTS="$JAVA_OPTS -Dcom.sun.management.jmxremote.ssl=false"
 fi
+
+또는 (logstash 7.4에서는 아래 옵션 필요 )
+LS_JAVA_OPTS: "-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.port=9881 -Dcom.sun.management.jmxremote.rmi.port=18080 -Djava.rmi.server.hostname=34.84.47.120 -Dcom.sun.management.jmxremote.local.only=false"
 ```
 
 - 또는 export를 이용
